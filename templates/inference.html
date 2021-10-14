@@ -2,34 +2,50 @@
 
 {% block content %}
 
-<div>
-    <h1>
-        Previously processed images:
-    </h1>
-</div>
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center row">
-    {% for img in img_list %}
-    <div class="column">
-    <img width="100" height="100" src={{img}} />
-    </div>
-    {% endfor %}
-</div>
-<br>
 <div class="column">
-    <p class="lead">File uploaded successfully. Classification result:</p>
+    <p class="lead">Files uploaded successfully. Classification result:</p>
+</div>
+<div class="bs-component">
+    <table class="table table-hover">
+        <tr>
+            <th scope="col" bgcolor="#008000">Image</th>
+            <th scope="col" bgcolor="#008000">Predicted Classes</th>
+            <th scope="col" bgcolor="#008000">Confidence</th>
+        </tr>
+        {% for i in length_list %}
+            <tr>
+                <th scope="row"> <img width="100" height="100" src={{new_images[i]}} />  </th>
+                <td> {{ic[i][0]}} </td>
+                <td> {{ic[i][1]}} </td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 
 <div>
-    {% for i in length_list %}
-        <img width="100" height="100" src={{new_images[i]}} />
-        <p>     </p>
-        <p class="mt-5">Predicted classes: <strong>{{ic[i][0]}}</strong></p>
-        <p>     </p>
-        <p class="mt-5">Confidence: <strong>{{ic[i][1]}}</strong></p><br>
-    {% endfor %}
+    <p class="lead">Last five processed images:</p>
 </div>
+<div class="bs-component">
+    <table class="table table-hover">
+        <tr>
+            <th scope="col" bgcolor="#c0c0c0">Image</th>
+            <th scope="col" bgcolor="#c0c0c0">Predicted Classes</th>
+            <th scope="col" bgcolor="#c0c0c0">Confidence</th>
+        </tr>
+        {% for j in last_5_idx_list %}
+            <tr>
+                <th scope="row"> <img width="50" height="50" src={{img_list[j]}} />  </th>
+                <td> {{i_ls[j]}} </td>
+                <td> {{c_ls[j]}} </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<br>
+
 <div>
-    <p class="mt-5"> <a href="/">Try again</a></p>
+    <p class="text-center mt-5"> <a href="/">Try again</a></p>
 </div>
 
 {% endblock %}
